@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SQL</string>
+    <string name="bttn_1">CLICK HERE TO SAVE THE WORLD</string>
+    <string name="bttn_2">SECOND ACTIVITY</string>
+    <string name="text_name">Name</string>
+    <string name="text_surname">Surname</string>
+    <string name="bttn_3">Submit</string>
+    <string name="error">Please provide correct data.</string>
+</resources>
