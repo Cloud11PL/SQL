@@ -39,15 +39,16 @@ public class Second extends AppCompatActivity {
     public void submit(View view){
 
         if(nameEdit.getText().toString() == null || surnameEdit.getText().toString() == null) {
-            Toast.makeText(getApplicationContext(),"Please provide complete data",Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(),"Please provide complete data",Toast.LENGTH_SHORT).show();
         } else {
-            String sqlStudent = "INSERT INTO STUDENCI VALUES (?,?)";
+            String sqlStudent = "INSERT INTO STUDENCI VALUES (?,?,?)";
             SQLiteStatement statement = database.compileStatement(sqlStudent);
 
-            statement.bindString(1,nameEdit.getText().toString());
-            statement.bindString(2,surnameEdit.getText().toString());
+            statement.bindString(2,nameEdit.getText().toString());
+            statement.bindString(3,surnameEdit.getText().toString());
 
             statement.executeInsert();
+            Toast.makeText(getApplicationContext(),"Person " + nameEdit.getText().toString() + " " + surnameEdit.getText().toString() + " was added to the database.",Toast.LENGTH_SHORT).show();
         }
     }
 }

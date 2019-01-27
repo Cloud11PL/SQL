@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.lang.reflect.Array;
@@ -17,11 +18,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase database;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        button = findViewById(R.id.button);
+        button.setEnabled(false);
 
         database = openOrCreateDatabase("Studenci",MODE_PRIVATE,null);
         /*
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         String dropSQl = "DROP TABLE IF EXISTS STUDENCI";
         database.execSQL(dropSQl);
 
-        String sqlDB = "CREATE TABLE IF NOT EXISTS STUDENCI (id PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR, surname VARCHAR)";
+        String sqlDB = "CREATE TABLE IF NOT EXISTS STUDENCI (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR, surname VARCHAR)";
         database.execSQL(sqlDB);
 
         String sqlCount = "SELECT count(*) FROM STUDENCI";
@@ -40,18 +44,18 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
 
         if(liczba == 0){
-            String sqlStudent = "INSERT INTO STUDENCI VALUES (?,?)";
+            String sqlStudent = "INSERT INTO STUDENCI VALUES (?,?,?)";
             SQLiteStatement statement = database.compileStatement(sqlStudent);
 
             //statement.bindLong(1,1);
-            statement.bindString(1,"Sharon");
-            statement.bindString(2,"Den Adel");
+            statement.bindString(2,"Sharon");
+            statement.bindString(3,"Den Adel");
 
             statement.executeInsert();
 
             //statement.bindLong(1,2);
-            statement.bindString(1,"Tarja");
-            statement.bindString(2,"Turnen");
+            statement.bindString(2,"Tarja");
+            statement.bindString(3,"Turnen");
 
             statement.executeInsert();
 
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,results);
         list.setAdapter(adapter);
         c.close();
+        button.setEnabled(true);
     }
 
     public void next(View view){
